@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_manager_filter" model="ir.ui.view">
+            <field name="name">hr.manager.search</field>
+            <field name="model">manager.history</field>
+            <field name="arch" type="xml">
+                <search string="Manager">
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Employee" name="employee_name" context="{'group_by':'employee_name'}"/>
+                        <separator/>
+                        <filter string="Manager" name="current_value" context="{'group_by':'current_value'}"/>
+                        <separator/>
+                        <filter string="Company" name="company_name" context="{'group_by':'company_name'}"/>
+                    </group>
+                </search>
+             </field>
+        </record>
+
+        <record id="view_manager_tree" model="ir.ui.view">
+            <field name="name">hr.manager.tree</field>
+            <field name="model">manager.history</field>
+            <field name="arch" type="xml">
+                <tree string="Employee History">
+                    <field name="employee_name" readonly="1"/>
+                    <field name="current_value"/>
+                    <field name="updated_date"/>
+                    <field name="end_date"/>
+                    <field name="company_name"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="hr_manager_list_tree_action" model="ir.actions.act_window">
+            <field name="name">Employee History</field>
+            <field name="res_model">manager.history</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'search_default_employee_name':1}</field>
+
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Manager
+                </p>
+            </field>
+        </record>
+      <menuitem
+            id="menu_hr_main"
+            name="Employee History"
+            parent="hr.menu_hr_root"
+            action="hr_manager_list_tree_action"
+            sequence="3"/>
+    </data>
+</odoo>

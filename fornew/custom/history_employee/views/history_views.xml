@@ -16,6 +16,22 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="employee_manager_history">
+            <field name="name">managerhistory.tree</field>
+            <field name="model">manager.history</field>
+<!--            <field name="view_mode">tree</field>-->
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id" invisible="True" />
+                    <field name ="employee_name" invisible="True"/>
+                    <field name="changed_field"/>
+                    <field name="updated_date"/>
+                    <field name="end_date"/>
+                    <field name="current_value"/>
+                </tree>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="employee_timesheet_history">
             <field name="name">timesheetcost.tree</field>
             <field name="model">timesheet.cost</field>

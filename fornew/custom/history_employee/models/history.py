@@ -6,7 +6,6 @@ from odoo.exceptions import UserError
 
 class DepartmentDetails(models.Model):
     _inherit = 'hr.employee'
-
     @api.onchange('department_id')
     def _onchange_department(self):
         employee_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
@@ -19,6 +18,26 @@ class DepartmentDetails(models.Model):
 
         }
         self.env['department.history'].sudo().create(vals)
+
+    @api.onchange('parent_id')
+    def _onchange_manager(self):
+        employee_his_id = self.env['manager.history'].search([('employee_id', '=', self._origin.id)], limit=1, order="id desc")
+
+        if employee_his_id:
+            employee_his_id['end_date'] = datetime.now()
+
+        employee_id = self.env['hr.employee'].search([('id', '=', self._origin.id)])
+        vals = {
+            'employee_id': self._origin.id,
+            'employee_name': employee_id.name,
+            'updated_date': datetime.now(),
+            'changed_field': 'Manager',
+            'current_value': self.parent_id.name,
+            'company_name': employee_id.company_id.name,
+            'manager_id': self.parent_id
+        }
+        self.env['manager.history'].sudo().create(vals)
+
 
     @api.onchange('job_id')
     def onchange_job_id(self):
@@ -61,6 +80,28 @@ class DepartmentDetails(models.Model):
                 'name': _("Department History"),
                 'view_mode': 'tree',
                 'res_model': 'department.history',
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+            }
+        else:
+            raise UserError('You cannot access this field!!!!')
+
+    def manager_details(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('hr.group_hr_manager'):
+            return {
+                'name': _("Manager History"),
+                'view_mode': 'tree',
+                'res_model': 'manager.history',
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                'domain': [('employee_id', '=', self.id)],
+            }
+        elif self.id == self.env.user.employee_id.id:
+            return {
+                'name': _("Manager History"),
+                'view_mode': 'tree',
+                'res_model': 'manager.history',
                 'type': 'ir.actions.act_window',
                 'target': 'new',
             }
@@ -196,6 +237,26 @@ class DepartmentHistory(models.Model):
     changed_field = fields.Char(string='Job position', help="Displays the changed department/job position")
     updated_date = fields.Date(string='Date', help="Display the date on which  department or job position changed")
     current_value = fields.Char(string='Designation', help="Display the designation")
+
+class ManagerHistory(models.Model):
+    _name = 'manager.history'
+    _description = "History"
+
+    employee_id = fields.Char(string='Employee Id', help="Employee")
+    employee_name = fields.Char(string='Employee Name', help="Name")
+    changed_field = fields.Char(string='Title', help="Displays the changed department/job position")
+    updated_date = fields.Date(string='Start Date', help="Display the date")
+    end_date = fields.Date(string='End Date', help="Display the start date")
+    current_value = fields.Char(string='Manager Name', help="Display the Manager")
+    company_name = fields.Char(string='Company Name', help="Display the company name")
+    manager_id = fields.Integer(string='Manager Id')
+
+
+
+    @api.depends('department_id')
+    def _compute_parent_id(self):
+        for employee in self.filtered('department_id.manager_id'):
+            employee.parent_id = employee.department_id.manager_id
 
 
 class TimesheetCost(models.Model):

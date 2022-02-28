@@ -11,6 +11,7 @@
     'depends': ['mail', 'hr'],
 
     'data': [
+        'security/ir.model.access.csv',
         'views/divisions.xml'
     ],
     'demo': [],

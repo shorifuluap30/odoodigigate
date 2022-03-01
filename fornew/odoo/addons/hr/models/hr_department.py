@@ -12,17 +12,21 @@ class Department(models.Model):
     _order = "name"
     _rec_name = 'complete_name'
 
-    name = fields.Char('Department Name', required=True)
+    name = fields.Char('Title', required=True)
     complete_name = fields.Char('Complete Name', compute='_compute_complete_name', recursive=True, store=True)
     active = fields.Boolean('Active', default=True)
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company)
-    parent_id = fields.Many2one('hr.department', string='Parent Department', index=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    parent_id = fields.Many2one('hr.department', string='Parent Department', index=True,
+                                domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
     child_ids = fields.One2many('hr.department', 'parent_id', string='Child Departments')
-    manager_id = fields.Many2one('hr.employee', string='Manager', tracking=True, domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    manager_id = fields.Many2one('hr.employee', string='Manager', tracking=True,
+                                 domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
+    # for division id
+    name_division_id = fields.Text('Division Id')
     member_ids = fields.One2many('hr.employee', 'department_id', string='Members', readonly=True)
     total_employee = fields.Integer(compute='_compute_total_employee', string='Total Employee')
     jobs_ids = fields.One2many('hr.job', 'department_id', string='Jobs')
-    note = fields.Text('Note')
+    description = fields.Text('Description')
     color = fields.Integer('Color Index')
 
     def name_get(self):
@@ -43,7 +47,8 @@ class Department(models.Model):
                 department.complete_name = department.name
 
     def _compute_total_employee(self):
-        emp_data = self.env['hr.employee'].read_group([('department_id', 'in', self.ids)], ['department_id'], ['department_id'])
+        emp_data = self.env['hr.employee'].read_group([('department_id', 'in', self.ids)], ['department_id'],
+                                                      ['department_id'])
         result = dict((data['department_id'][0], data['department_id_count']) for data in emp_data)
         for department in self:
             department.total_employee = result.get(department.id, 0)

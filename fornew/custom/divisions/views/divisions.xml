@@ -6,7 +6,7 @@
             <field name="model">company.division</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="title"/>
+                    <field name="name"/>
                     <field name="description"/>
                 </tree>
             </field>
@@ -18,27 +18,27 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="title"/>
+                            <field name="name"/>
                             <field name="description"/>
                         </group>
                     </sheet>
                 </form>
             </field>
         </record>
-         <record id="view_company_vivision_kanban" model="ir.ui.view">
+         <record id="view_company_division_kanban" model="ir.ui.view">
             <field name="name">company.division.kanban</field>
             <field name="model">company.division</field>
             <field name="arch" type="xml">
                 <kanban>
                     <field name="id"/>
-                    <field name="title"/>
+                    <field name="name"/>
                     <field name="description"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
                                 <div class="oe_kanban_details">
                                     <ul>
-                                        <li>Title: <field name="title"/></li>
+                                        <li>Title: <field name="name"/></li>
                                     </ul>
                                 </div>
                             </div>

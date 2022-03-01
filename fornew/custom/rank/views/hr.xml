@@ -2,29 +2,29 @@
 <odoo>
     <data>
 
-         <record model="ir.ui.view" id="hr_employee_rank_form_view">
+        <record model="ir.ui.view" id="hr_employee_rank_form_view">
             <field name="name">hr.employeerank.view</field>
             <field name="model">hr.employee</field>
-             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//page[@name='hr_settings']" position="before">
+                <xpath expr="//page[@name='hr_settings']" position="before">
                     <page name="rank" string="Employee Rank">
-                         <group string='Rank' name="rank_group">
-<!--                            <field name="company_id" string="Company id"/>-->
+                        <group string='Rank' name="rank_group">
+                            <!--                            <field name="company_id" string="Company id"/>-->
                             <field name="name_id" string="Title"/>
                             <field name="min_salary" string="Min Salary"/>
                             <field name="max_salary" string="Max Salary"/>
                         </group>
 
                     </page>
-                 </xpath>
+                </xpath>
             </field>
-         </record>
+        </record>
         <menuitem
-            id="menu_hr_rank"
-            name="Employee Rank"
-            parent="hr.menu_hr_root"
-            action="hr_rank_action"
-            sequence="3"/>
+                id="menu_hr_rank"
+                name="Employee Rank"
+                parent="hr.menu_hr_root"
+                action="hr_rank_action"
+                sequence="3"/>
     </data>
 </odoo>

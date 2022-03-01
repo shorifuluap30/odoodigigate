@@ -16,7 +16,7 @@
                             <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                             <field name="manager_id"/>
                             <field name="parent_id"/>
-                            <field name="name_division_id"/>
+<!--                            <field name="name_id2"/>-->
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -37,7 +37,7 @@
                     <field name="manager_id"/>
                     <field name="total_employee" string="Employees"/>
                     <field name="parent_id"/>
-                    <field name="name_division_id"/>
+<!--                    <field name="name_id2"/>-->
                     <field name="description"/>
                 </tree>
             </field>

@@ -22,7 +22,8 @@ class Department(models.Model):
     manager_id = fields.Many2one('hr.employee', string='Manager', tracking=True,
                                  domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]")
     # for division id
-    name_division_id = fields.Text('Division Id')
+    # name_division_id = fields.Text('Division Id')
+    # name_id2 = fields.Many2one('company.division', string="Division Id", required=True)
     member_ids = fields.One2many('hr.employee', 'department_id', string='Members', readonly=True)
     total_employee = fields.Integer(compute='_compute_total_employee', string='Total Employee')
     jobs_ids = fields.One2many('hr.job', 'department_id', string='Jobs')

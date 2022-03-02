@@ -1,19 +1,232 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-
          <record model="ir.ui.view" id="hr_employee_details_form_view">
             <field name="name">hr.employeedetails.view</field>
             <field name="model">hr.employee</field>
              <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
-                 <xpath expr="//page[@name='personal_information']" position="after">
-                    <page name="eployee_details" string="Employee Details">
-                        <field name="division_name"/>
+                 <xpath expr="//field[@name='department_id']" position="before">
+                    <field name="division_id"/>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_employee_personaldetails_form_view">
+            <field name="name">hr.employeepersonaldetails.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='address_home_id']" position="after">
+                    <field name="permanent_address"/>
+                    <field name="nick_name"/>
+                    <field name="father_name"/>
+                    <field name="mother_name"/>
+                    <field name="tax_code"/>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_employee_personal_info_form_view">
+            <field name="name">hr.employeepersonalinfo.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='gender']" position="after">
+                    <field name="religion"/>
+                    <field name="blood_group"/>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_employee_education_form_view">
+            <field name="name">hr.employee.education.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='personal_information']" position="before">
+                    <page name="education_label" string="Academic Qualification">
+
+                        <field name="education_lines" widget="one2many">
+                            <tree string="Education" editable="bottom" >
+                                <field name="exam_title"/>
+                                <field name="subject"/>
+                                <field name="board"/>
+                                <field name="result"/>
+                                <field name="year"/>
+                                <field name="employee_id" invisible="1"/>
+                            </tree>
+                        </field>
                     </page>
                  </xpath>
             </field>
          </record>
+        <record model="ir.ui.view" id="hr_employee_training_form_view">
+            <field name="name">hr.employee.training.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='education_label']" position="after">
+                    <page name="employee_training" string="Training Information">
+
+                        <field name="training_lines" widget="one2many">
+                            <tree string="Training" editable="bottom" >
+                                <field name="title"/>
+                                <field name="institute"/>
+                                <field name="duration"/>
+                                <field name="year"/>
+                                <field name="employee_training_id" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_employee_job_history_form_view">
+            <field name="name">hr.employee.job.history.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='employee_training']" position="after">
+                    <page name="employee_job_history" string="Employment History">
+
+                        <field name="job_lines" widget="one2many">
+                            <tree string="Employment History" editable="bottom" >
+                                <field name="organization"/>
+                                <field name="position"/>
+                                <field name="service_period"/>
+                                <field name="employee_id_for_jod" invisible="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_emergency_contact_form_view">
+            <field name="name">hr.employee.emergency.contact.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='emergency_phone']" position="after">
+                    <field name="emr_cont_relation"/>
+                    <field name="emr_cont_address"/>
+
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_emergency_contact_second_form_view">
+            <field name="name">hr.employee.emergency.second.contact.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='emr_contact']" position="after">
+                     <group string="Emergency Second Contact" name="emr_second_contact">
+                        <field name="emr_cont_contact_2nd"/>
+                        <field name="emr_cont_phone_2nd"/>
+                        <field name="emr_cont_relation_2nd"/>
+                        <field name="emr_cont_address_2nd"/>
+                    </group>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_employee_spouse_information_form_view">
+            <field name="name">hr.employee.spouse.info.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='marital_status']" position="after">
+                     <group string="Spouse Information" name="spouse_info">
+                         <field name="wife_name"/>
+                         <field name="wife_contact"/>
+                         <field name="wife_profession"/>
+
+                    </group>
+                 </xpath>
+            </field>
+         </record>
+        <record model="ir.ui.view" id="hr_emergency_children_form_view">
+            <field name="name">hr.employee.children.contact.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='spouse_info']" position="after">
+                     <group string="Children Information" name="children_info">
+                     </group>
+                    <field name="children_lines" widget="one2many">
+                        <tree string="Employment History" editable="bottom" >
+                            <field name="children_name"/>
+                            <field name="children_sex"/>
+                            <field name="children_date_of_birth"/>
+                            <field name="employee_id_for_children" invisible="1"/>
+                        </tree>
+                    </field>
+                 </xpath>
+            </field>
+         </record>
+
+         <record model="ir.ui.view" id="hr_employee_reference_form_view">
+            <field name="name">hr.employee.reference.contact.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='has_work_permit']" position="after">
+                     <group string="Reference-1" name="emp_ref">
+                        <field name="ref_name"/>
+                        <field name="ref_position"/>
+                        <field name="ref_organization"/>
+                        <field name="ref_address"/>
+                        <field name="ref_contact"/>
+                        <field name="ref_relationship"/>
+                    </group>
+                 </xpath>
+            </field>
+         </record>
+
+         <record model="ir.ui.view" id="hr_employee_second_reference_form_view">
+            <field name="name">hr.employee.second.reference.contact.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='emp_ref']" position="after">
+                     <group string="Reference-2" name="emp_second_ref">
+                        <field name="ref_name2"/>
+                        <field name="ref_position2"/>
+                        <field name="ref_organization2"/>
+                        <field name="ref_address2"/>
+                        <field name="ref_contact2"/>
+                        <field name="ref_relationship2"/>
+                    </group>
+                 </xpath>
+            </field>
+         </record>
+
+        <record model="ir.ui.view" id="hr_employee_declaration_form_view">
+            <field name="name">hr.employee.declaration.contact.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='personal_info']" position="after">
+                     <group string="Declaration" name="employee_declaration">
+                    </group>
+                     <p>1. The particulars furnished in this form are accurate and complete to my knowledge and belief and I have not knowingly withheld any information, which, if disclosed, would affect my service unfavorably.</p>
+                     <p>2.	I shall be deemed to have been guilty of gross default/misconduct, in the event of my appointment with US-Bangla Assets Ltd. if at any future date it is found that my declaration as above is false or materially incomplete in any respect, and in that case my services with the company will be liable to termination without notice or payment in lieu of notice or any benefit or any compensation whatsoever.</p>
+                     <group>
+                         <group>
+                             <field name="signature_image" widget="image"/>
+                         </group>
+                         <group>
+                             <field name="signature_date"/>
+                         </group>
+                     </group>
+                 </xpath>
+            </field>
+         </record>
+
+
 
     </data>
 </odoo>

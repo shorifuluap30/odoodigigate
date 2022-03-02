@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_training,access.employee.training,model_employee_training,,1,1,1,1
+access_education_level,access.education.level,model_education_level,,1,1,1,1
+access_job_history,access.job.history,model_job_history,,1,1,1,1
+access_employee_children,access.employee.children,model_employee_children,,1,1,1,1

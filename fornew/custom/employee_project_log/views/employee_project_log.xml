@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_project_log_form" model="ir.ui.view">
+            <field name="name">employee.project.log.form</field>
+            <field name="model">employee.project.log</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="project_name"/>
+                                <field name="manager_id"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="employee_company_id"/>
+                            </group>
+                        </group>
+                        <label for="employee_ids"/>
+                        <field name="employee_ids" domain="[('company_id', '=', employee_company_id)]"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record model="ir.ui.view" id="view_employee_project_log_tree">
+            <field name="name">employee.project.log.tree</field>
+            <field name="model">employee.project.log</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Log">
+                    <field name ="company_id"/>
+                    <field name ="project_name"/>
+                    <field name ="manager_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+        <record id="hr_employee_project_log_action" model="ir.actions.act_window">
+            <field name="name">Employee project Log</field>
+            <field name="res_model">employee.project.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Manager
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="menu_employee_project_log"
+                name="Employee Log"
+                parent="hr.menu_hr_root"
+                action="hr_employee_project_log_action"
+                sequence="5"/>
+        </data>
+</odoo>

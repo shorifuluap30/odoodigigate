@@ -12,7 +12,8 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'views/divisions.xml'
+        'views/divisions.xml',
+        'views/divisions_department.xml'
     ],
     'demo': [],
     'qweb': [],

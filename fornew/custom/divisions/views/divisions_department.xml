@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--for add division id inside department-->
+        <record model="ir.ui.view" id="division_department_form_view">
+            <field name="name">division.department.view</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="before">
+                    <field name="division_id" string="Division"/>
+                </xpath>
+            </field>
+        </record>
+        <!--for add division id inside department tree view-->
+
+        <record model="ir.ui.view" id="division_department_tree_view">
+            <field name="name">division.department.view</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="before">
+                    <field name="division_id" string="Division"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

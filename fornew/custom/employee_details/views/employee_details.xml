@@ -7,10 +7,22 @@
              <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
                  <xpath expr="//field[@name='department_id']" position="before">
-                    <field name="division_id"/>
+                     <field name="division_id"/>
                  </xpath>
             </field>
          </record>
+
+        <record model="ir.ui.view" id="hr_employee_section_form_view">
+            <field name="name">hr.employee.section.view</field>
+            <field name="model">hr.employee</field>
+             <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='department_id']" position="after">
+                     <field name="section_id"/>
+                 </xpath>
+            </field>
+         </record>
+
 
         <record model="ir.ui.view" id="hr_employee_personaldetails_form_view">
             <field name="name">hr.employeepersonaldetails.view</field>

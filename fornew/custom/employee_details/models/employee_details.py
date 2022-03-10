@@ -1,11 +1,27 @@
 from odoo import api, fields, models
 
-
 class EmployeeDetails(models.Model):
     _inherit = "hr.employee"
 
-    division_id = fields.Many2one('company.division', string="Division", required=True)
-    section_id = fields.Many2one('company.sections', string="Section")
+    @api.onchange('department_id')
+    def onchange_department_id(self):
+        if self.division_id:
+            if self.company_id:
+                if self.department_id:
+                    for rec in self:
+                        return {'domain': {'section_id': ['&', '&', ('company_id', '=', rec.company_id.id),
+                                                          ('division_id', '=', rec.division_id.id), ('department_id', '=', rec.department_id.id)]}}
+
+    @api.onchange('division_id')
+    def onchange_division_id(self):
+        if self.division_id:
+            if self.company_id:
+                for rec in self:
+                    return {'domain': {'department_id': ['&', ('company_id', '=', rec.company_id.id),
+                                                      ('division_id', '=', rec.division_id.id)]}}
+
+    division_id = fields.Many2one('company.division', string='Division')
+    section_id = fields.Many2one('company.sections', string='Section')
 
     nick_name = fields.Char(string="Nick Name")
     father_name = fields.Char(string="Father Name")

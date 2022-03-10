@@ -11,7 +11,7 @@
                     <page name="rank" string="Employee Rank">
                         <group string='Rank' name="rank_group">
                             <!--                            <field name="company_id" string="Company id"/>-->
-                            <field name="name_id" string="Title"/>
+                            <field name="rank_id" string="Title"/>
                             <field name="min_salary" string="Min Salary"/>
                             <field name="max_salary" string="Max Salary"/>
                         </group>

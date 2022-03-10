@@ -8,8 +8,8 @@
                 <tree>
                     <field name="name"/>
                     <field name="company_id"/>
-                    <field name="name_id"/>
-                    <field name="name_id2"/>
+                    <field name="division_id"/>
+                    <field name="department_id"/>
                     <field name="description"/>
                 </tree>
             </field>
@@ -23,8 +23,8 @@
                         <group>
                             <field name="name"/>
                             <field name="company_id"/>
-                            <field name="name_id"/>
-                            <field name="name_id2"/>
+                            <field name="division_id"/>
+                            <field name="department_id"/>
                             <field name="description"/>
                         </group>
                     </sheet>
@@ -51,10 +51,10 @@
                                             <field name="company_id"/>
                                         </li>
                                         <li>Division_Id:
-                                            <field name="name_id"/>
+                                            <field name="division_id"/>
                                         </li>
                                         <li>Department_Id:
-                                            <field name="name_id2"/>
+                                            <field name="department_id"/>
                                         </li>
                                         <li>Description:
                                             <field name="description"/>

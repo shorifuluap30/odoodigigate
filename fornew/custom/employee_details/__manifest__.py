@@ -1,5 +1,5 @@
 {
-    'name': 'company_divisions',
+    'name': 'Employee Details',
     'author': 'Digigate360',
     'version': '1.1',
     'summary': 'Management Software',
